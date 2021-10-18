@@ -1,27 +1,34 @@
-import React from "react";
-import Text from "./components/text";
+import React, { useState } from "react";
+import Button from "./components/Button";
+import History from "./components/History";
 
- const App = () => {
-  const now = new Date();
-  const a = 10;
-  const b = 20;
+const App = () => {
+  const [left, setLeft] = useState(0);
+  const [right, setRight] = useState(0);
+  const [allClicks, setAll] = useState([]);
+
+  const handleLeftClick = () => {
+    setLeft(left + 1)
+    setAll(allClicks.concat('L'))
+  };
+
+  const handleRightClick = () => {
+    setRight(right + 1)
+    setAll(allClicks.concat('R'))
+
+  };
 
   return (
     <div>
+      <p> {left} </p>
+      <Button onClick={handleLeftClick} text="Left Click" />
 
-      <p> {now.toString()} </p>
-      <p>{a + b}</p>
+      <p> {right} </p>
+      <Button onClick={handleRightClick } text="Right Click" />
 
-      <Text name="oguz"/>
-      <Text name="taha"/>
-
-
+      <History allClicks={allClicks}  />
     </div>
-  )
-
-  
-
-  ;
+  );
 };
-
 export default App;
+
