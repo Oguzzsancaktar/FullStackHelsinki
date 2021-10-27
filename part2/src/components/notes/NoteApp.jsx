@@ -6,6 +6,14 @@ import Note from "./Note";
 const NoteApp = (props) => {
   const [notes, setNotes] = useState(props.notes);
   const [newNote, setNewNote] = useState("new note is it");
+  const [showAll, setShowAll] = useState(true);
+
+  const notesToShow = showAll
+    ? notes
+    : notes.filter((note) => note.important === true);
+  console.log("asd", );
+
+  console.log(Math.random() - 0.5);
 
   const addNewNote = (event) => {
     event.preventDefault();
@@ -14,15 +22,14 @@ const NoteApp = (props) => {
       id: notes.length + 1,
       content: newNote,
       date: new Date(),
-      important: Math,
+      important: Math.random() < 0.5,
     };
 
-    setNewNote('')
+    setNewNote("");
     setNotes(notes.concat(noteObject));
   };
 
   const handleNoteChange = (event) => {
-    console.log(event.target.value);
     setNewNote(event.target.value);
   };
 
@@ -30,7 +37,13 @@ const NoteApp = (props) => {
     <div>
       <h1>Example 2 Note List </h1>
 
-      {notes.map((note, index) => (
+    <div>
+      <button onClick={()=> setShowAll(!showAll)}>
+          Show {showAll ? 'important': 'all'}
+      </button>
+    </div>
+
+      {notesToShow.map((note, index) => (
         <Note key={index} note={note.content} />
       ))}
 
