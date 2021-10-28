@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Filter from "./Filter";
-import PersonForm from "./PersonForm";
-import Persons from "./Persons";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
 
-import axios from'axios'
+import axios from "axios";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,12 +13,11 @@ const App = () => {
   const [newPersons, setNewPersons] = useState(persons);
   const [isFiltering, setIsFiltering] = useState(false);
 
-
   useEffect(() => {
-    axios.get('http://localhost:3001/persons').then((response)=>{
-      setPersons(response.data)
-    })
-  }, [])
+    axios.get("http://localhost:3001/persons").then((response) => {
+      setPersons(response.data);
+    });
+  }, []);
 
   const handleInputChange = (event) => {
     switch (event.target.id) {
@@ -55,11 +54,16 @@ const App = () => {
       alert(`name is not be emty`);
     } else if (!persons.filter((item) => item.name === newName).length) {
       const newPersonObject = {
-        id: persons.length + 1,
+        // id: persons.length + 1,
         name: newName,
         number: newPhone,
       };
-      setPersons(persons.concat(newPersonObject));
+      // setPersons(persons.concat(newPersonObject));
+      axios
+        .post("http://localhost:3001/persons", newPersonObject)
+        .then((res) => {
+          console.log(res);
+        });
       setNewName("");
       setNewPhone("");
     } else {
