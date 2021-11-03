@@ -62,7 +62,7 @@ const App = () => {
       axios
         .post("http://localhost:3001/persons", newPersonObject)
         .then((res) => {
-          console.log(res);
+         setPersons(persons.concat(res.data))
         });
       setNewName("");
       setNewPhone("");
@@ -70,6 +70,11 @@ const App = () => {
       alert(`${newName} is added before please try another`);
     }
   };
+
+  const removeUser = (id) =>{
+    console.log(id);
+    setPersons(persons.map((person) => person.id !== id ? person : null))
+  }
 
   return (
     <div>
@@ -84,11 +89,12 @@ const App = () => {
         newName={newName}
         newPhone={newPhone}
       />
-      <h2>Numbers</h2>
+      <h2>Numbers</h2> 
       <Persons
         isFiltering={isFiltering}
         newPersons={newPersons}
         persons={persons}
+        onClick={removeUser}
       />
     </div>
   );
