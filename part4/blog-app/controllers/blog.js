@@ -12,18 +12,40 @@ mongoose
     console.log('DB connection error: ', e);
   });
 
-blogRouter.get('/', (request, response) => {
-  Blog.find({}).then((blogs) => {
-    response.json(blogs);
-  });
+blogRouter.get('/', async (request, response) => {
+  const blogs = await Blog.find({});
+  response.send(blogs);
 });
 
-blogRouter.post('/', (request, response) => {
+blogRouter.post('/', async (request, response) => {
   const blog = new Blog(request.body);
 
-  blog.save().then((result) => {
+  try {
+    const result = await blog.save();
+
     response.status(201).json(result);
-  });
+  } catch (error) {
+    response.status(400).send(error);
+  }
+});
+
+blogRouter.delete('/:id', async (req, res) => {
+  const id = req.params.id;
+  const deletedBlog = await Blog.findByIdAndDelete(id);
+
+  res.send(deletedBlog);
+});
+
+blogRouter.get('/favoriteBlog', async (req, res) => {
+  let mostLike = 0;
+  const blogs = await Blog.find({});
+
+  blogs.map((blog) =>
+    blog.likes > mostLike ? (mostLike = blog.likes) : mostLike
+  );
+
+  const favBlog = await Blog.find({ likes: mostLike });
+  res.send(favBlog);
 });
 
 module.exports = blogRouter;
