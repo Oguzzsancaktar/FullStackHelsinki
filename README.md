@@ -8,4 +8,4 @@
 #### Part1
 - In part 1 we have a two excercises which Anecdotes and Unicafe, Im did in same project to this two excercises.
 
-![alt text](http://url/to/img.pnghttps://github.com/Oguzzsancaktar/FullStackHelsinki/blob/master/certificate-fullstack-oguzsancaktar.png?raw=true)
+![oguzsancaktar certificate](https://github.com/Oguzzsancaktar/FullStackHelsinki/blob/master/certificate-fullstack-oguzsancaktar.png?raw=true)
