@@ -1,19 +1,19 @@
 const config = require('./utils/config')
 const express = require('express')
 require('express-async-errors')
+const mongoose = require('mongoose')
 const app = express()
 const cors = require('cors')
 const notesRouter = require('./controllers/notes')
 const usersRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
-const mongoose = require('mongoose')
-const loginRouter = require('./controllers/login')
 
 logger.info('connecting to', config.mongoUrl)
 
 mongoose
-  .connect(config.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(config.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
   .then(() => {
     logger.info('connected to MongoDB')
   })
