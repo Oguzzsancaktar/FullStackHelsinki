@@ -8,5 +8,5 @@ const login = async (credentials) => {
 }
 
 
-const loginService = {login}
+const loginService = { login }
 export default loginService

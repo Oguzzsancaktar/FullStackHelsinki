@@ -2,6 +2,7 @@ const Blog = require('../models/blog');
 const mongoose = require('mongoose');
 const config = require('../utils/config');
 const blogRouter = require('express').Router();
+// const logger = require('../utils/logger')
 
 mongoose
   .connect(config.mongoUrl)
@@ -29,12 +30,12 @@ blogRouter.post('/', async (request, response) => {
   }
 });
 
-blogRouter.delete('/:id', async (req, res) => {
-  const id = req.params.id;
-  const deletedBlog = await Blog.findByIdAndDelete(id);
+// blogRouter.delete('/:id', async (req, res) => {
+//   const id = req.params.id;
+//   const deletedBlog = await Blog.findByIdAndDelete(id);
 
-  res.send(deletedBlog);
-});
+//   res.send(deletedBlog);
+// });
 
 blogRouter.get('/favoriteBlog', async (req, res) => {
   let mostLike = 0;
@@ -51,19 +52,35 @@ blogRouter.get('/favoriteBlog', async (req, res) => {
 blogRouter.put('/:id', async (req, res) => {
   const id = req.params.id;
   const body = req.body;
-  
+
   try {
-    const editedBlog = await Blog.replaceOne({_id:id}, body);
+    const editedBlog = await Blog.replaceOne({ _id: id }, body);
 
     if (!editedBlog) {
       return res.status(404).send('Blog not found !');
     }
 
     res.send(editedBlog);
-
-
   } catch (error) {
     res.send(error);
+  }
+});
+
+blogRouter.delete('/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deletedBlog = await Blog.findByIdAndDelete(id);
+    if (!(deletedBlog)) {
+      return res.status(404).send('blog not found for delete!');
+    }
+    const blogs = await Blog.find({})
+    if (!blogs) {
+      return res.status(404).send('blogs not found after blog deleted')
+    }
+
+    res.send(blogs);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
