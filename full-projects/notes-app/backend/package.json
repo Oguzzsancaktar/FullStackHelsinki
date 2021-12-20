@@ -11,12 +11,13 @@
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cross-env": "^7.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
