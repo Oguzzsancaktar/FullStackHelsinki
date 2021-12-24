@@ -7,9 +7,14 @@ import reducer from './reducers/anecdoteReducer'
 
 const store = createStore(reducer)
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
+const renderApp = ()=>{
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  )
+}
+
+
+renderApp()
