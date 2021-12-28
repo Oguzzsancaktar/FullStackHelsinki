@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../../part6/redux-anecdotes-app/node_modules/axios'
 const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = async () => {

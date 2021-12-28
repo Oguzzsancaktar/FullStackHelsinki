@@ -40,9 +40,11 @@ export const createNote = (data) => {
 }
 
 export const toggleImportanceOf = (data) => {
-  return {
-    type: 'TOGGLE_IMPORTANCE',
-    data
+  return dispatch => {
+    dispatch({
+      type: 'TOGGLE_IMPORTANCE',
+      data
+    })
   }
 }
 

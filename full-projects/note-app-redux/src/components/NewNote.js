@@ -1,25 +1,25 @@
-import { useDispatch } from "react-redux"
-import { createNote } from "../reducers/noteReducer"
-import noteService from "../services/notes"
+import React from 'react'
+import { connect } from 'react-redux'
+import { createNote } from '../reducers/noteReducer'
 
-const NewNote = () => {
-  const dispatch = useDispatch()
+const NewNote = (props) => {
 
-
-  const addNote = async (e) => {
-    e.preventDefault()
-    const content = e.target.note.value
-    e.target.note.value = ''
-    const newNote = await noteService.createNew(content)
-    dispatch(createNote(newNote))
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    props.createNote(content)
   }
 
   return (
     <form onSubmit={addNote}>
-      <input type="text" name="note" />
-      <button type="submit">Add note</button>
-    </form>  
+      <input name="note" />
+      <button type="submit">add</button>
+    </form>
   )
 }
 
-export default NewNote
+export default connect(
+  null,
+  { createNote }
+)(NewNote)

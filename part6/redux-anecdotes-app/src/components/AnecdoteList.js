@@ -8,7 +8,7 @@ const AnecdoteList = () => {
   const filter = useSelector(state => state.filter)
   const sortedAnecdotes = anecdotes.sort((a, b) => b.votes - a.votes)
   
-  const vote = (id) => {
+  const vote = async (id) => {
     dispatch(voteAnecdote(id))
   }
 

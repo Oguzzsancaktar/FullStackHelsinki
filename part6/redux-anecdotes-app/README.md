@@ -1,0 +1,1 @@
+Please Re Read the part 5 for learning redux important connect '
