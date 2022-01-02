@@ -12,7 +12,7 @@ class ClassComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/anecdotes').then((result) => {
+      axios.get('http://localhost:3001/anecdotes').then((result) => {
       console.log(result);
       this.setState({ anecdotes: result.data });
       console.log(this.state.anecdotes);
